@@ -6,7 +6,7 @@ const Contact = () => {
     const [form, setForm] = useState({
         nombre: '',
         contacto: '',
-        mensaje: ''
+        mensaje: '',
     });
 
     const [enviado, setEnviado] = useState(false);
@@ -38,11 +38,14 @@ const Contact = () => {
                 </div>
 
                 <form className="contact-form" onSubmit={handleSubmit}>
+                    <h2>Envíame un mensaje</h2>
+
                     <label>
                         Nombre
                         <input
                             type="text"
                             name="nombre"
+                            placeholder="¿Cómo te llamas?"
                             value={form.nombre}
                             onChange={handleChange}
                             required
@@ -54,6 +57,7 @@ const Contact = () => {
                         <input
                             type="text"
                             name="contacto"
+                            placeholder="Tu correo electrónico o número de WhatsApp"
                             value={form.contacto}
                             onChange={handleChange}
                             required
@@ -65,13 +69,14 @@ const Contact = () => {
                         <textarea
                             name="mensaje"
                             rows="4"
+                            placeholder="Cuéntame qué pieza te interesa o en qué puedo ayudarte"
                             value={form.mensaje}
                             onChange={handleChange}
                             required
                         />
                     </label>
 
-                    <button type="submit" className="btn-primary">
+                    <button type="submit" className="btn-primary btn-embroidered">
                         Enviar mensaje
                     </button>
 

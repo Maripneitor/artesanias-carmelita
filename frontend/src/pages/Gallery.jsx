@@ -4,12 +4,12 @@ import React from 'react';
 // Galería básica (se conectará a fotos reales después)
 const Gallery = () => {
     const items = [
-        'Vestidos',
-        'Muñecas',
-        'Textiles',
+        'Vestidos chiapanecos',
+        'Muñecas artesanales',
+        'Textiles para el hogar',
         'Detalles de bordado',
-        'Taller',
-        'Local'
+        'El taller',
+        'La tienda',
     ];
 
     return (
@@ -24,7 +24,10 @@ const Gallery = () => {
                 <div className="gallery-grid">
                     {items.map((label, idx) => (
                         <div key={idx} className="gallery-item">
-                            <div className="gallery-placeholder">{label}</div>
+                            {/* TODO: reemplazar por imagen real */}
+                            <div className="gallery-placeholder">
+                                <span className="gallery-label">{label}</span>
+                            </div>
                         </div>
                     ))}
                 </div>

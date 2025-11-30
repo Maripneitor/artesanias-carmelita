@@ -13,20 +13,28 @@ const HeroSection = () => {
     return (
         <section className="hero">
             <div className="hero-content">
+                <span className="hero-kicker">Hecho a mano en Chiapas</span>
                 <h1>Artesanías auténticas de Chiapas</h1>
                 <p>
                     Vestidos, muñecas y textiles hechos a mano, inspirados en los colores
-                    de Chiapa de Corzo.
+                    y tradiciones de Chiapas.
                 </p>
-                <button className="btn-primary" onClick={handleClick}>
-                    Ver productos
-                </button>
+                <div className="hero-actions">
+                    <button className="btn-primary" onClick={handleClick}>
+                        Ver productos
+                    </button>
+                    <span className="hero-subnote">
+                        Piezas únicas con bordados tradicionales.
+                    </span>
+                </div>
             </div>
 
             <div className="hero-image">
                 {/* TODO: reemplazar por foto real de vestido chiapaneco */}
                 <div className="hero-image-placeholder">
-                    Vestido chiapaneco<br />[Imagen de referencia]
+                    Vestido chiapaneco
+                    <br />
+                    [Imagen de referencia]
                 </div>
             </div>
         </section>

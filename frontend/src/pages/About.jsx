@@ -1,7 +1,7 @@
 // frontend/src/pages/About.jsx
 import React from 'react';
 
-// Página "Sobre mí" con línea de tiempo
+// Página "Sobre mí" con línea de tiempo y valores
 const About = () => {
     return (
         <div className="page page-about">
@@ -12,7 +12,7 @@ const About = () => {
                     <h1>Mi historia entre hilos y tradición</h1>
                     <p>
                         [Aquí irá la biografía real de la artesana, su familia, sus inicios
-                        y su amor por las artesanías.] // TODO: completar con texto real
+                        y su amor por las artesanías.] {/* TODO: completar con texto real */}
                     </p>
                 </div>
             </section>
@@ -47,9 +47,47 @@ const About = () => {
                 <h2>Mi taller</h2>
                 <p>
                     [Texto sobre la técnica, proceso y tiempo de elaboración de las
-                    piezas.] // TODO: completar con información real
+                    piezas.] {/* TODO: completar con información real */}
                 </p>
                 {/* TODO: galería de fotos del taller */}
+            </section>
+
+            <section className="section section-values">
+                <h2>Misión y valores</h2>
+                <div className="values-grid">
+                    <div className="value-card">
+                        <span className="value-icon">🌺</span>
+                        <h3>Autenticidad</h3>
+                        <p>
+                            Cada bordado refleja flores y figuras tradicionales que respetan
+                            los diseños originales de Chiapas.
+                        </p>
+                    </div>
+                    <div className="value-card">
+                        <span className="value-icon">🧶</span>
+                        <h3>Tradición</h3>
+                        <p>
+                            El oficio se ha transmitido de generación en generación, manteniendo
+                            técnicas artesanales vivas.
+                        </p>
+                    </div>
+                    <div className="value-card">
+                        <span className="value-icon">🪡</span>
+                        <h3>Calidad</h3>
+                        <p>
+                            Piezas cuidadas puntada a puntada, con materiales seleccionados y
+                            terminados detallados.
+                        </p>
+                    </div>
+                    <div className="value-card">
+                        <span className="value-icon">🌀</span>
+                        <h3>Cultura</h3>
+                        <p>
+                            Cada prenda y muñeca cuenta una historia y acerca la cultura
+                            chiapaneca a nuevas personas.
+                        </p>
+                    </div>
+                </div>
             </section>
         </div>
     );
