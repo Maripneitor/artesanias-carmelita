@@ -17,27 +17,36 @@ const Contact = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // TODO: conectar con backend / servicio de correo en el futuro
+        // TODO: conectar con backend / servicio de correo
         setEnviado(true);
     };
 
     return (
         <div className="page page-contact">
-            <section className="section contact-section">
+            <section
+                className="section contact-section"
+                aria-labelledby="contact-title"
+            >
                 <div className="contact-info">
-                    <h1>Contacto</h1>
+                    <h1 id="contact-title">Contacto</h1>
                     <p>
                         Si tienes dudas sobre tallas, colores o tiempos de elaboración,
                         escríbeme. Será un gusto atenderte.
                     </p>
                     <ul>
-                        <li>WhatsApp: [DATO_POR_DEFINIR]</li>
-                        <li>Teléfono: [DATO_POR_DEFINIR]</li>
-                        <li>Correo: [DATO_POR_DEFINIR]</li>
+                        <li>
+                            <strong>WhatsApp:</strong> [DATO_POR_DEFINIR]
+                        </li>
+                        <li>
+                            <strong>Teléfono:</strong> [DATO_POR_DEFINIR]
+                        </li>
+                        <li>
+                            <strong>Correo:</strong> [DATO_POR_DEFINIR]
+                        </li>
                     </ul>
                 </div>
 
-                <form className="contact-form" onSubmit={handleSubmit}>
+                <form className="contact-form" onSubmit={handleSubmit} noValidate>
                     <h2>Envíame un mensaje</h2>
 
                     <label>

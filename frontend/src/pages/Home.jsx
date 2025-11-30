@@ -47,7 +47,7 @@ const Home = () => {
         const node = carouselRef.current;
         if (!node) return;
 
-        const scrollAmount = 260;
+        const scrollAmount = 280;
         node.scrollBy({
             left: direction === 'next' ? scrollAmount : -scrollAmount,
             behavior: 'smooth',
@@ -58,8 +58,18 @@ const Home = () => {
         <div className="page page-home">
             <HeroSection />
 
-            <section className="section section-featured">
-                <h2>Productos destacados</h2>
+            <section
+                className="section section-featured"
+                aria-labelledby="featured-title"
+            >
+                <div className="section-header">
+                    <h2 id="featured-title">Productos destacados</h2>
+                    <p className="section-subtitle">
+                        Una selección de piezas que representan los colores y bordados
+                        más queridos de la tienda.
+                    </p>
+                </div>
+
                 <div className="products-grid">
                     {featuredProducts.map((p) => (
                         <ProductCard key={p.id} product={p} />
@@ -67,13 +77,22 @@ const Home = () => {
                 </div>
             </section>
 
-            <section className="section section-essence">
+            <section
+                className="section section-essence"
+                aria-labelledby="essence-title"
+            >
                 <div className="essence-image">
                     {/* TODO: foto real de la artesana */}
-                    <div className="essence-image-placeholder">Foto de la artesana</div>
+                    <div
+                        className="essence-image-placeholder"
+                        role="img"
+                        aria-label="Fotografía de la artesana en su taller"
+                    >
+                        <span aria-hidden="true">Foto de la artesana</span>
+                    </div>
                 </div>
                 <div className="essence-text">
-                    <h2>Nuestra esencia</h2>
+                    <h2 id="essence-title">Nuestra esencia</h2>
                     <p>
                         Cada puntada cuenta una historia. Artesanías Carmelita nace del amor
                         por las raíces chiapanecas y el deseo de compartirlas con el mundo.
@@ -86,9 +105,12 @@ const Home = () => {
                 </div>
             </section>
 
-            <section className="section section-textiles">
+            <section
+                className="section section-textiles"
+                aria-labelledby="textiles-title"
+            >
                 <div className="section-textiles-header">
-                    <h2>Textiles y colores de Chiapas</h2>
+                    <h2 id="textiles-title">Textiles y colores de Chiapas</h2>
                     <p>
                         Bordados, flores y figuras geométricas que mezclan el fucsia
                         chiapaneco, el turquesa y el amarillo maíz en piezas únicas.
@@ -105,12 +127,21 @@ const Home = () => {
                         ‹
                     </button>
 
-                    <div className="textiles-carousel" ref={carouselRef}>
+                    <div
+                        className="textiles-carousel"
+                        ref={carouselRef}
+                        aria-label="Galería horizontal de textiles"
+                    >
                         {textilesItems.map((label, idx) => (
                             <div key={idx} className="textiles-item">
-                                <div className="textiles-thumb">
-                                    {/* TODO: reemplazar por fotos reales de textiles */}
-                                    <span className="textiles-label">{label}</span>
+                                <div
+                                    className="textiles-thumb"
+                                    role="img"
+                                    aria-label={label}
+                                >
+                                    <span className="textiles-label" aria-hidden="true">
+                                        {label}
+                                    </span>
                                 </div>
                             </div>
                         ))}
@@ -127,9 +158,12 @@ const Home = () => {
                 </div>
             </section>
 
-            <section className="section section-how-to-arrive">
+            <section
+                className="section section-how-to-arrive"
+                aria-labelledby="how-to-arrive-title"
+            >
                 <div className="how-text">
-                    <h2>Cómo llegar</h2>
+                    <h2 id="how-to-arrive-title">Cómo llegar</h2>
                     <p>
                         Visítanos en nuestra tienda física y descubre los bordados en vivo,
                         los colores originales y el proceso artesanal de cada pieza.
@@ -149,8 +183,14 @@ const Home = () => {
 
                 <div className="how-map">
                     <div className="how-map-card">
-                        {/* TODO: reemplazar por mini mapa o foto real de la fachada */}
-                        <div className="map-mini-placeholder">Vista rápida de la ubicación</div>
+                        {/* TODO: mini mapa o foto real de la fachada */}
+                        <div
+                            className="map-mini-placeholder"
+                            role="img"
+                            aria-label="Vista rápida de la ubicación de la tienda"
+                        >
+                            Vista rápida de la ubicación
+                        </div>
                     </div>
                 </div>
             </section>

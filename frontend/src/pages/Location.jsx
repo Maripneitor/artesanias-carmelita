@@ -1,20 +1,26 @@
 // frontend/src/pages/Location.jsx
 import React from 'react';
 
-// Página de ubicación con mapa embebido
+// Página de ubicación con mapa y datos
 const Location = () => {
     return (
         <div className="page page-location">
-            <section className="banner banner-location">
+            <section
+                className="banner banner-location"
+                aria-labelledby="location-banner-title"
+            >
                 <div className="banner-overlay">
-                    <h1>Encuéntranos fácilmente</h1>
+                    <h1 id="location-banner-title">Encuéntranos fácilmente</h1>
                     <p>[DATO_POR_DEFINIR: breve descripción de la ubicación]</p>
                 </div>
             </section>
 
-            <section className="section section-location-details">
+            <section
+                className="section section-location-details"
+                aria-labelledby="location-details-title"
+            >
                 <div className="location-info">
-                    <h2>Dirección y cómo llegar</h2>
+                    <h2 id="location-details-title">Dirección y cómo llegar</h2>
                     <p>
                         Dirección: <strong>[DATO_POR_DEFINIR]</strong>
                     </p>
@@ -38,8 +44,12 @@ const Location = () => {
                 </div>
 
                 <div className="map-wrapper">
-                    {/* TODO: reemplazar src por el iframe real de Google Maps */}
-                    <div className="map-placeholder">
+                    {/* TODO: reemplazar por el iframe real de Google Maps */}
+                    <div
+                        className="map-placeholder"
+                        role="img"
+                        aria-label="Mapa con la ubicación de Artesanías Carmelita"
+                    >
                         Aquí irá el mapa de Google Maps
                     </div>
                 </div>

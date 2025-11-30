@@ -11,7 +11,10 @@ const WhatsAppButton = () => {
             className="whatsapp-floating"
             aria-label="Abrir chat de WhatsApp de Artesanías Carmelita"
         >
-            <span className="whatsapp-icon">🧵</span>
+            {/* Podrías cambiar este emoji por un ícono SVG de WhatsApp */}
+            <span className="whatsapp-icon" aria-hidden="true">
+                🧵
+            </span>
         </a>
     );
 };

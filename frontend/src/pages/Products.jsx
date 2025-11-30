@@ -2,7 +2,7 @@
 import React from 'react';
 import ProductCard from '../components/products/ProductCard.jsx';
 
-// Mock de producto como catálogo inicial
+// Mock de productos como catálogo inicial
 const mockProducts = [
     {
         id: 1,
@@ -33,16 +33,28 @@ const mockProducts = [
 const Products = () => {
     return (
         <div className="page page-products">
-            <section className="banner">
+            <section
+                className="banner banner-products"
+                aria-labelledby="products-banner-title"
+            >
                 <div className="banner-overlay">
-                    <h1>Catálogo de artesanías</h1>
-                    <p>Explora los colores y texturas de Chiapas.</p>
+                    <h1 id="products-banner-title">Catálogo de artesanías</h1>
+                    <p>
+                        Explora los colores, texturas y bordados que hacen única a cada
+                        pieza de Artesanías Carmelita.
+                    </p>
                 </div>
             </section>
 
-            <section className="section section-products-list">
+            <section
+                className="section section-products-list"
+                aria-labelledby="products-list-title"
+            >
                 <div className="products-layout">
-                    <aside className="products-filters">
+                    <aside
+                        className="products-filters"
+                        aria-label="Filtros visuales del catálogo"
+                    >
                         <h2>Filtros</h2>
 
                         <div className="filter-group">
@@ -57,7 +69,7 @@ const Products = () => {
 
                         <div className="filter-group">
                             <h3>Colores</h3>
-                            <div className="filter-colors">
+                            <div className="filter-colors" aria-hidden="true">
                                 <span
                                     className="color-dot color-dot-primary"
                                     title="Fucsia chiapaneco"
@@ -79,16 +91,18 @@ const Products = () => {
 
                         <div className="filter-group">
                             <h3>Rango de precio</h3>
-                            <p className="filter-helper">Próximamente podrás filtrar por precio.</p>
+                            <p className="filter-helper">
+                                Próximamente podrás filtrar por rango de precio.
+                            </p>
                         </div>
                     </aside>
 
                     <div className="products-results">
                         <div className="products-results-header">
-                            <h2>Todos los productos</h2>
+                            <h2 id="products-list-title">Todos los productos</h2>
                             <p className="products-results-sub">
-                                Vista inicial del catálogo. Filtros y conexión con backend se
-                                agregarán en siguientes versiones.
+                                Vista inicial del catálogo. En futuras versiones podrás filtrar,
+                                ordenar y ver más detalles de cada pieza.
                             </p>
                         </div>
 

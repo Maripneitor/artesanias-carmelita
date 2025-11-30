@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-// Header fijo con navegación principal y menú móvil
+// Header fijo con navegación principal y menú móvil accesible
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -10,87 +10,96 @@ const Header = () => {
         setIsOpen((prev) => !prev);
     };
 
-    const handleLinkClick = () => {
+    const handleCloseMenu = () => {
         setIsOpen(false);
     };
 
     const navLinkClass = ({ isActive }) =>
-        isActive ? 'nav-link active' : 'nav-link';
+        isActive ? 'nav-link nav-link-active' : 'nav-link';
 
     return (
         <header className="header">
             <div className="header-inner">
-                <div className="header-logo">
-                    {/* TODO: reemplazar por logo real */}
-                    <span className="logo-mark">AC</span>
+                <div className="header-logo" aria-label="Artesanías Carmelita">
+                    {/* TODO: reemplazar por logo real (imagen o SVG) */}
+                    <span className="logo-mark" aria-hidden="true">
+                        AC
+                    </span>
                     <span className="logo-text">Artesanías Carmelita</span>
                 </div>
 
-                <nav className={`header-nav ${isOpen ? 'is-open' : ''}`}>
+                <nav
+                    className={`header-nav ${isOpen ? 'is-open' : ''}`}
+                    aria-label="Navegación principal"
+                >
                     <NavLink
                         to="/"
                         end
                         className={navLinkClass}
-                        onClick={handleLinkClick}
+                        onClick={handleCloseMenu}
                     >
                         Inicio
                     </NavLink>
                     <NavLink
                         to="/productos"
                         className={navLinkClass}
-                        onClick={handleLinkClick}
+                        onClick={handleCloseMenu}
                     >
                         Productos
                     </NavLink>
                     <NavLink
                         to="/sobre-mi"
                         className={navLinkClass}
-                        onClick={handleLinkClick}
+                        onClick={handleCloseMenu}
                     >
                         Sobre mí
                     </NavLink>
                     <NavLink
                         to="/galeria"
                         className={navLinkClass}
-                        onClick={handleLinkClick}
+                        onClick={handleCloseMenu}
                     >
                         Galería
                     </NavLink>
                     <NavLink
                         to="/ubicacion"
                         className={navLinkClass}
-                        onClick={handleLinkClick}
+                        onClick={handleCloseMenu}
                     >
                         Ubicación
                     </NavLink>
                     <NavLink
                         to="/contacto"
                         className={navLinkClass}
-                        onClick={handleLinkClick}
+                        onClick={handleCloseMenu}
                     >
                         Contacto
                     </NavLink>
                 </nav>
 
-                <button
-                    type="button"
-                    className={`header-menu-toggle ${isOpen ? 'is-open' : ''}`}
-                    onClick={handleToggleMenu}
-                    aria-label={isOpen ? 'Cerrar menú de navegación' : 'Abrir menú de navegación'}
-                >
-                    <span />
-                    <span />
-                    <span />
-                </button>
+                <div className="header-actions">
+                    <a
+                        className="header-cta"
+                        href="https://wa.me/[DATO_POR_DEFINIR]"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        WhatsApp
+                    </a>
 
-                <a
-                    className="header-cta"
-                    href="https://wa.me/[DATO_POR_DEFINIR]"
-                    target="_blank"
-                    rel="noreferrer"
-                >
-                    WhatsApp
-                </a>
+                    <button
+                        type="button"
+                        className={`header-menu-toggle ${isOpen ? 'is-open' : ''}`}
+                        onClick={handleToggleMenu}
+                        aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
+                        aria-expanded={isOpen}
+                        aria-controls="main-navigation"
+                    >
+                        <span />
+                        <span />
+                        <span />
+                    </button>
+                </div>
             </div>
         </header>
     );
