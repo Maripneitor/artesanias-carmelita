@@ -1,36 +1,19 @@
 // frontend/src/pages/Products.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import ProductCard from '../components/products/ProductCard.jsx';
-
-// Mock de productos como catálogo inicial
-const mockProducts = [
-    {
-        id: 1,
-        nombre: 'Vestido chiapaneco negro',
-        categoria: 'Vestimenta',
-        descripcion: 'Vestido negro con flores bordadas multicolor.',
-    },
-    {
-        id: 2,
-        nombre: 'Vestido chiapaneco blanco',
-        categoria: 'Vestimenta',
-        descripcion: 'Vestido blanco con bordado fucsia y turquesa.',
-    },
-    {
-        id: 3,
-        nombre: 'Muñeca chiapaneca grande',
-        categoria: 'Muñecas',
-        descripcion: 'Muñeca de tela con listones y vestido tradicional.',
-    },
-    {
-        id: 4,
-        nombre: 'Camino de mesa rojo lacandón',
-        categoria: 'Textiles',
-        descripcion: 'Camino de mesa con figuras geométricas indígenas.',
-    },
-];
+import FancyProductCard from '../components/products/FancyProductCard.jsx';
+import { products } from '../data/products.js';
+import { useCart } from '../context/CartContext.jsx';
 
 const Products = () => {
+    const { openCart, addToCart } = useCart();
+
+    // Filtrar productos premium para la sección destacada
+    const premiumProducts = products.filter(p => p.isPremium);
+
+    // El resto de productos para el catálogo general
+    const generalProducts = products; // Por ahora mostramos todos en el grid general
+
     return (
         <div className="page page-products">
             <section
@@ -45,6 +28,37 @@ const Products = () => {
                     </p>
                 </div>
             </section>
+
+            {/* Sección de productos destacados con FancyProductCard */}
+            {premiumProducts.length > 0 && (
+                <section className="section" aria-labelledby="fancy-products-title">
+                    <h2 id="fancy-products-title">Productos Premium</h2>
+                    <p style={{ marginBottom: '1.5rem', color: 'rgba(0,0,0,0.7)' }}>
+                        Nuestras piezas más exclusivas con opciones de talla
+                    </p>
+                    <div style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+                        gap: '1.5rem',
+                        justifyItems: 'center'
+                    }}>
+                        {premiumProducts.map((product) => (
+                            <FancyProductCard
+                                key={product.id}
+                                product={{
+                                    ...product,
+                                    image: product.images[0], // Adaptador para FancyProductCard
+                                    variants: ['XS', 'S', 'M', 'L'] // Mock variants si no existen
+                                }}
+                                onAddToCart={(item) => {
+                                    addToCart(product, 1, item.selectedVariant);
+                                    openCart();
+                                }}
+                            />
+                        ))}
+                    </div>
+                </section>
+            )}
 
             <section
                 className="section section-products-list"
@@ -107,7 +121,7 @@ const Products = () => {
                         </div>
 
                         <div className="products-grid">
-                            {mockProducts.map((p) => (
+                            {generalProducts.map((p) => (
                                 <ProductCard key={p.id} product={p} />
                             ))}
                         </div>

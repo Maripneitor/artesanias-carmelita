@@ -1,5 +1,6 @@
 // frontend/src/components/layout/Footer.jsx
 import React from 'react';
+import SocialButtons from '../common/SocialButtons.jsx';
 
 // Pie de página con franja textil y bloques de información
 const Footer = () => {
@@ -28,22 +29,8 @@ const Footer = () => {
                 </div>
 
                 <div className="footer-section">
-                    <h4>Redes</h4>
-                    <p>
-                        <a href="[DATO_POR_DEFINIR_FACEBOOK]" target="_blank" rel="noreferrer">
-                            Facebook
-                        </a>
-                    </p>
-                    <p>
-                        <a href="[DATO_POR_DEFINIR_INSTAGRAM]" target="_blank" rel="noreferrer">
-                            Instagram
-                        </a>
-                    </p>
-                    <p>
-                        <a href="[DATO_POR_DEFINIR_TIKTOK]" target="_blank" rel="noreferrer">
-                            TikTok
-                        </a>
-                    </p>
+                    <h4>Síguenos</h4>
+                    <SocialButtons variant="footer" />
                 </div>
             </div>
 

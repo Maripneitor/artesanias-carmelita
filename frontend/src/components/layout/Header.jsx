@@ -1,10 +1,22 @@
 // frontend/src/components/layout/Header.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useCart } from '../../context/CartContext.jsx';
 
 // Header fijo con navegación principal y menú móvil accesible
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const { toggleCart, cartCount } = useCart();
+    const [animateCart, setAnimateCart] = useState(false);
+
+    // Animación del contador cuando cambia
+    useEffect(() => {
+        if (cartCount > 0) {
+            setAnimateCart(true);
+            const timer = setTimeout(() => setAnimateCart(false), 300);
+            return () => clearTimeout(timer);
+        }
+    }, [cartCount]);
 
     const handleToggleMenu = () => {
         setIsOpen((prev) => !prev);
@@ -78,14 +90,31 @@ const Header = () => {
                 </nav>
 
                 <div className="header-actions">
-                    <a
-                        className="header-cta"
-                        href="https://wa.me/[DATO_POR_DEFINIR]"
-                        target="_blank"
-                        rel="noreferrer"
+                    {/* Botón del carrito */}
+                    <button
+                        className={`header-cart-btn ${animateCart ? 'bump' : ''}`}
+                        onClick={toggleCart}
+                        aria-label={`Carrito de compras, ${cartCount} productos`}
                     >
-                        WhatsApp
-                    </a>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        >
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                        {cartCount > 0 && (
+                            <span className="cart-count-badge">{cartCount}</span>
+                        )}
+                    </button>
 
                     <button
                         type="button"

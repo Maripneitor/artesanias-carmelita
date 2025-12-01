@@ -1,35 +1,10 @@
 // frontend/src/pages/Home.jsx
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import HeroSection from '../components/home/HeroSection.jsx';
 import ProductCard from '../components/products/ProductCard.jsx';
-
-// Productos destacados mock (para prototipo)
-const featuredProducts = [
-    {
-        id: 1,
-        nombre: 'Vestido chiapaneco tradicional',
-        categoria: 'Vestimenta',
-        descripcion: 'Bordado a mano con flores inspiradas en Chiapa de Corzo.',
-    },
-    {
-        id: 2,
-        nombre: 'Muñeca artesanal chiapaneca',
-        categoria: 'Muñecas',
-        descripcion: 'Muñeca de tela con vestido típico lleno de color.',
-    },
-    {
-        id: 3,
-        nombre: 'Camino de mesa bordado',
-        categoria: 'Textiles',
-        descripcion: 'Textil para mesa con patrones geométricos chiapanecos.',
-    },
-    {
-        id: 4,
-        nombre: 'Blusa bordada',
-        categoria: 'Vestimenta',
-        descripcion: 'Blusa ligera con bordado floral tradicional.',
-    },
-];
+import AlertCard from '../components/common/AlertCard.jsx';
+import { products } from '../data/products.js';
 
 const textilesItems = [
     'Bordado floral fucsia',
@@ -42,6 +17,15 @@ const textilesItems = [
 
 const Home = () => {
     const carouselRef = useRef(null);
+    const navigate = useNavigate();
+
+    // Obtener productos destacados (premium o los primeros 4)
+    const featuredProducts = products.filter(p => p.isPremium).slice(0, 4);
+    // Si no hay suficientes premium, rellenar
+    if (featuredProducts.length < 4) {
+        const others = products.filter(p => !p.isPremium).slice(0, 4 - featuredProducts.length);
+        featuredProducts.push(...others);
+    }
 
     const scrollCarousel = (direction) => {
         const node = carouselRef.current;
@@ -54,9 +38,24 @@ const Home = () => {
         });
     };
 
+    const handleAlertRead = () => {
+        navigate('/productos');
+    };
+
     return (
         <div className="page page-home">
             <HeroSection />
+
+            {/* Alert Card - Mensaje de bienvenida/promoción */}
+            <section className="section" style={{ display: 'flex', justifyContent: 'center' }}>
+                <AlertCard
+                    title="¡Bienvenido a Artesanías Carmelita!"
+                    message="Descubre nuestras nuevas piezas bordadas a mano con los colores tradicionales de Chiapas. Cada artesanía cuenta una historia única."
+                    readText="Ver catálogo"
+                    markText="Cerrar"
+                    onRead={handleAlertRead}
+                />
+            </section>
 
             <section
                 className="section section-featured"

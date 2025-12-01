@@ -1,5 +1,6 @@
 // frontend/src/pages/Contact.jsx
 import React, { useState } from 'react';
+import SocialButtons from '../components/common/SocialButtons.jsx';
 
 // Formulario de contacto con campos coloridos al focus
 const Contact = () => {
@@ -55,37 +56,10 @@ const Contact = () => {
                         </li>
                     </ul>
 
-                    {/* Redes sociales con estilo artesanal */}
+                    {/* Redes sociales con SocialButtons */}
                     <div style={{ marginTop: '2rem' }}>
-                        <h3 style={{ fontSize: '1.1rem', marginBottom: '0.75rem' }}>Síguenos</h3>
-                        <div style={{ display: 'flex', gap: '1rem' }}>
-                            <a
-                                href="#"
-                                style={{
-                                    fontSize: '1.8rem',
-                                    transition: 'transform 0.2s ease',
-                                    display: 'inline-block'
-                                }}
-                                onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.2)'}
-                                onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
-                                aria-label="Facebook"
-                            >
-                                📘
-                            </a>
-                            <a
-                                href="#"
-                                style={{
-                                    fontSize: '1.8rem',
-                                    transition: 'transform 0.2s ease',
-                                    display: 'inline-block'
-                                }}
-                                onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.2)'}
-                                onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
-                                aria-label="Instagram"
-                            >
-                                📷
-                            </a>
-                        </div>
+                        <h3 style={{ fontSize: '1.1rem', marginBottom: '1rem' }}>Síguenos en redes sociales</h3>
+                        <SocialButtons variant="contact" />
                     </div>
                 </div>
 
