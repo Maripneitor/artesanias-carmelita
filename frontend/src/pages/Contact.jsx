@@ -1,7 +1,7 @@
 // frontend/src/pages/Contact.jsx
 import React, { useState } from 'react';
 
-// Formulario de contacto (por ahora solo frontend)
+// Formulario de contacto con campos coloridos al focus
 const Contact = () => {
     const [form, setForm] = useState({
         nombre: '',
@@ -19,6 +19,7 @@ const Contact = () => {
         e.preventDefault();
         // TODO: conectar con backend / servicio de correo
         setEnviado(true);
+        setTimeout(() => setEnviado(false), 3000);
     };
 
     return (
@@ -33,17 +34,59 @@ const Contact = () => {
                         Si tienes dudas sobre tallas, colores o tiempos de elaboración,
                         escríbeme. Será un gusto atenderte.
                     </p>
-                    <ul>
-                        <li>
-                            <strong>WhatsApp:</strong> [DATO_POR_DEFINIR]
+                    <ul style={{ listStyle: 'none', padding: 0, marginTop: '1.5rem' }}>
+                        <li style={{ marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                            <span style={{ fontSize: '1.2rem' }}>💬</span>
+                            <div>
+                                <strong>WhatsApp:</strong> [DATO_POR_DEFINIR]
+                            </div>
                         </li>
-                        <li>
-                            <strong>Teléfono:</strong> [DATO_POR_DEFINIR]
+                        <li style={{ marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                            <span style={{ fontSize: '1.2rem' }}>📞</span>
+                            <div>
+                                <strong>Teléfono:</strong> [DATO_POR_DEFINIR]
+                            </div>
                         </li>
-                        <li>
-                            <strong>Correo:</strong> [DATO_POR_DEFINIR]
+                        <li style={{ marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                            <span style={{ fontSize: '1.2rem' }}>✉️</span>
+                            <div>
+                                <strong>Correo:</strong> [DATO_POR_DEFINIR]
+                            </div>
                         </li>
                     </ul>
+
+                    {/* Redes sociales con estilo artesanal */}
+                    <div style={{ marginTop: '2rem' }}>
+                        <h3 style={{ fontSize: '1.1rem', marginBottom: '0.75rem' }}>Síguenos</h3>
+                        <div style={{ display: 'flex', gap: '1rem' }}>
+                            <a
+                                href="#"
+                                style={{
+                                    fontSize: '1.8rem',
+                                    transition: 'transform 0.2s ease',
+                                    display: 'inline-block'
+                                }}
+                                onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.2)'}
+                                onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                                aria-label="Facebook"
+                            >
+                                📘
+                            </a>
+                            <a
+                                href="#"
+                                style={{
+                                    fontSize: '1.8rem',
+                                    transition: 'transform 0.2s ease',
+                                    display: 'inline-block'
+                                }}
+                                onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.2)'}
+                                onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                                aria-label="Instagram"
+                            >
+                                📷
+                            </a>
+                        </div>
+                    </div>
                 </div>
 
                 <form className="contact-form" onSubmit={handleSubmit} noValidate>
@@ -90,8 +133,15 @@ const Contact = () => {
                     </button>
 
                     {enviado && (
-                        <p className="contact-success">
-                            ¡Gracias! Tu mensaje se ha registrado (versión demo).
+                        <p className="contact-success" style={{
+                            marginTop: '1rem',
+                            padding: '0.75rem',
+                            background: 'rgba(31, 183, 165, 0.1)',
+                            borderRadius: '8px',
+                            color: 'var(--color-secondary)',
+                            textAlign: 'center'
+                        }}>
+                            ✓ ¡Gracias! Tu mensaje se ha registrado (versión demo).
                         </p>
                     )}
                 </form>

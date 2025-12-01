@@ -1,5 +1,5 @@
 // frontend/src/pages/Home.jsx
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import HeroSection from '../components/home/HeroSection.jsx';
 import ProductCard from '../components/products/ProductCard.jsx';
 
@@ -88,7 +88,7 @@ const Home = () => {
                         role="img"
                         aria-label="Fotografía de la artesana en su taller"
                     >
-                        <span aria-hidden="true">Foto de la artesana</span>
+                        <span aria-hidden="true">👩‍🎨</span>
                     </div>
                 </div>
                 <div className="essence-text">
@@ -101,7 +101,21 @@ const Home = () => {
                         <li>✨ Tradición</li>
                         <li>🧵 Hecho a mano</li>
                         <li>🌺 Colores auténticos</li>
+                        <li>💖 Con amor</li>
                     </ul>
+                    {/* TODO: Placeholder para video del taller */}
+                    <div style={{
+                        marginTop: '1.5rem',
+                        padding: '1rem',
+                        background: 'rgba(217, 15, 114, 0.05)',
+                        borderRadius: '12px',
+                        border: '2px dashed rgba(217, 15, 114, 0.2)',
+                        textAlign: 'center',
+                        fontSize: '0.9rem',
+                        color: 'rgba(0,0,0,0.6)'
+                    }}>
+                        📹 Espacio para video del taller (próximamente)
+                    </div>
                 </div>
             </section>
 
@@ -177,7 +191,7 @@ const Home = () => {
                         target="_blank"
                         rel="noreferrer"
                     >
-                        Abrir en Maps
+                        📍 Abrir en Maps
                     </a>
                 </div>
 
@@ -189,7 +203,7 @@ const Home = () => {
                             role="img"
                             aria-label="Vista rápida de la ubicación de la tienda"
                         >
-                            Vista rápida de la ubicación
+                            🗺️ Vista rápida de la ubicación
                         </div>
                     </div>
                 </div>

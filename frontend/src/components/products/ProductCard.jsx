@@ -1,15 +1,29 @@
 // frontend/src/components/products/ProductCard.jsx
-import React from 'react';
+import React, { useState } from 'react';
 
-// Tarjeta de producto con microinteracciones suaves
+// Tarjeta de producto con microinteracciones suaves y corazón interactivo
 const ProductCard = ({ product }) => {
     const { nombre, categoria, descripcion } = product;
+    const [isFavorite, setIsFavorite] = useState(false);
+
+    const handleFavoriteClick = (e) => {
+        e.stopPropagation();
+        setIsFavorite(!isFavorite);
+    };
 
     return (
         <article className="product-card">
-            <span className="product-heart" aria-hidden="true">
-                ♥
-            </span>
+            <button
+                className="product-heart"
+                onClick={handleFavoriteClick}
+                aria-label={isFavorite ? "Quitar de favoritos" : "Agregar a favoritos"}
+                style={{
+                    background: isFavorite ? 'var(--color-primary)' : 'rgba(249, 244, 238, 0.95)',
+                    color: isFavorite ? '#fff' : 'var(--color-primary)'
+                }}
+            >
+                {isFavorite ? '♥' : '♡'}
+            </button>
 
             <div
                 className="product-image"

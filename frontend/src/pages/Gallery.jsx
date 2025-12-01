@@ -1,15 +1,17 @@
 // frontend/src/pages/Gallery.jsx
 import React from 'react';
 
-// Galería básica (se conectará a fotos reales después)
+// Galería con mosaico tipo patchwork
 const Gallery = () => {
     const items = [
-        'Vestidos chiapanecos',
-        'Muñecas artesanales',
-        'Textiles para el hogar',
-        'Detalles de bordado',
-        'El taller',
-        'La tienda',
+        { label: 'Vestidos chiapanecos', size: 'large' },
+        { label: 'Muñecas artesanales', size: 'medium' },
+        { label: 'Textiles para el hogar', size: 'medium' },
+        { label: 'Detalles de bordado', size: 'small' },
+        { label: 'El taller', size: 'large' },
+        { label: 'La tienda', size: 'small' },
+        { label: 'Proceso artesanal', size: 'medium' },
+        { label: 'Colores tradicionales', size: 'small' },
     ];
 
     return (
@@ -21,12 +23,31 @@ const Gallery = () => {
                     artesanía chiapaneca.
                 </p>
 
-                <div className="gallery-grid">
-                    {items.map((label, idx) => (
-                        <div key={idx} className="gallery-item">
+                <div className="gallery-grid" style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+                    gap: '1.25rem',
+                    marginTop: '1.5rem',
+                    gridAutoFlow: 'dense'
+                }}>
+                    {items.map((item, idx) => (
+                        <div
+                            key={idx}
+                            className="gallery-item"
+                            style={{
+                                gridColumn: item.size === 'large' ? 'span 2' : 'span 1',
+                                gridRow: item.size === 'large' ? 'span 2' : 'span 1'
+                            }}
+                        >
                             {/* TODO: reemplazar por imagen real */}
-                            <div className="gallery-placeholder">
-                                <span className="gallery-label">{label}</span>
+                            <div
+                                className="gallery-placeholder"
+                                style={{
+                                    minHeight: item.size === 'large' ? '320px' :
+                                        item.size === 'medium' ? '200px' : '150px'
+                                }}
+                            >
+                                <span className="gallery-label">{item.label}</span>
                             </div>
                         </div>
                     ))}

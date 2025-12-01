@@ -1,7 +1,7 @@
 // frontend/src/components/common/WhatsAppButton.jsx
 import React from 'react';
 
-// Botón flotante de WhatsApp con microinteracción tipo "latido"
+// Botón flotante de WhatsApp con microinteracción tipo "latido" y marco artesanal
 const WhatsAppButton = () => {
     return (
         <a
@@ -10,10 +10,11 @@ const WhatsAppButton = () => {
             rel="noreferrer"
             className="whatsapp-floating"
             aria-label="Abrir chat de WhatsApp de Artesanías Carmelita"
+            title="Contáctanos por WhatsApp"
         >
-            {/* Podrías cambiar este emoji por un ícono SVG de WhatsApp */}
+            {/* Ícono de WhatsApp - podrías reemplazar con SVG real */}
             <span className="whatsapp-icon" aria-hidden="true">
-                🧵
+                💬
             </span>
         </a>
     );

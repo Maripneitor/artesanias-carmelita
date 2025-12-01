@@ -121,7 +121,7 @@ p {
 
 .section {
     margin-top: 3rem;
-    animation: fadeInUp 0.6s ease both;
+    animation: weaverSlide 0.8s ease both;
 }
 
 /* ===========================
@@ -135,6 +135,27 @@ p {
     background: rgba(249, 244, 238, 0.96);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+/* Franja textil decorativa en header */
+.header::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg,
+            var(--color-primary) 0%,
+            var(--color-primary) 25%,
+            var(--color-accent) 25%,
+            var(--color-accent) 50%,
+            var(--color-secondary) 50%,
+            var(--color-secondary) 75%,
+            var(--color-decorative) 75%,
+            var(--color-decorative) 100%);
+    background-size: 40px 3px;
+    opacity: 0.7;
 }
 
 .header-inner {
@@ -324,6 +345,8 @@ p {
 .hero-content h1 {
     font-size: 3rem;
     margin-bottom: 1rem;
+    animation: embroideryReveal 1.2s ease-out both;
+    animation-delay: 0.3s;
 }
 
 .hero-content p {
@@ -350,17 +373,60 @@ p {
     z-index: 1;
 }
 
+/* Flores decorativas en hero */
+.hero-image::before {
+    content: '🌺';
+    position: absolute;
+    top: -10px;
+    right: 10%;
+    font-size: 2rem;
+    opacity: 0.6;
+    animation: floralFloat 8s ease-in-out infinite;
+    z-index: 2;
+}
+
+.hero-image::after {
+    content: '🌸';
+    position: absolute;
+    bottom: 10px;
+    left: 8%;
+    font-size: 1.5rem;
+    opacity: 0.5;
+    animation: floralFloat 10s ease-in-out infinite;
+    animation-delay: 2s;
+    z-index: 2;
+}
+
 .hero-image-placeholder {
     width: 100%;
     min-height: 260px;
     border-radius: 24px;
-    border: 2px dashed var(--color-decorative);
+    border: 3px solid transparent;
+    background: linear-gradient(var(--color-neutral-light), var(--color-neutral-light)) padding-box,
+        linear-gradient(135deg,
+            var(--color-primary),
+            var(--color-accent),
+            var(--color-secondary)) border-box;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-image-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
     background: linear-gradient(135deg,
             rgba(217, 15, 114, 0.18),
             rgba(31, 183, 165, 0.18)),
         url('/src/assets/textile-pattern-placeholder.jpg');
     background-size: cover;
     background-position: center;
+    border-radius: 21px;
+}
+
+.hero-image-placeholder span {
+    position: relative;
+    z-index: 1;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -369,6 +435,7 @@ p {
     font-size: 1.25rem;
     color: #fff;
     padding: 1rem;
+    height: 100%;
 }
 
 /* ===========================
@@ -398,14 +465,33 @@ p {
 }
 
 .btn-embroidered {
-    border: 2px solid transparent;
+    border: 3px solid transparent;
     background-image: linear-gradient(var(--color-primary), var(--color-primary)),
         linear-gradient(90deg,
             var(--color-primary),
             var(--color-accent),
-            var(--color-secondary));
+            var(--color-secondary),
+            var(--color-decorative));
     background-origin: border-box;
     background-clip: padding-box, border-box;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-embroidered::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.3) 50%,
+            transparent 100%);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.btn-embroidered:hover::before {
+    transform: translateX(100%);
 }
 
 .btn-outline {
@@ -456,32 +542,43 @@ p {
 }
 
 .product-card:hover {
-    transform: translateY(-4px) scale(1.01);
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.16);
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 12px 32px rgba(217, 15, 114, 0.15),
+        0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .product-heart {
     position: absolute;
     top: 10px;
     right: 12px;
-    width: 26px;
-    height: 26px;
+    width: 32px;
+    height: 32px;
     border-radius: 999px;
-    background: rgba(249, 244, 238, 0.9);
+    background: rgba(249, 244, 238, 0.95);
+    border: 2px solid var(--color-primary);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: var(--color-primary);
     opacity: 0;
     transform: scale(0.7);
-    transition: opacity 0.18s ease, transform 0.18s ease;
-    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    cursor: pointer;
+    pointer-events: auto;
+    z-index: 2;
 }
 
 .product-card:hover .product-heart {
     opacity: 1;
     transform: scale(1);
+    animation: heartFill 0.4s ease-out;
+}
+
+.product-heart:hover {
+    background: var(--color-primary);
+    color: #fff;
+    transform: scale(1.1);
 }
 
 .product-image {
@@ -544,13 +641,28 @@ p {
 
 .essence-image-placeholder {
     border-radius: 24px;
-    border: 2px dashed var(--color-secondary);
+    border: 3px solid transparent;
+    background: linear-gradient(var(--color-neutral-light), var(--color-neutral-light)) padding-box,
+        linear-gradient(135deg,
+            var(--color-secondary),
+            var(--color-accent)) border-box;
     min-height: 220px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: var(--font-title);
     font-size: 1.1rem;
+    position: relative;
+}
+
+/* Flores decorativas en imagen de esencia */
+.essence-image-placeholder::before {
+    content: '🌺';
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    font-size: 1.8rem;
+    animation: gentlePulse 4s ease-in-out infinite;
 }
 
 .essence-values {
@@ -711,6 +823,19 @@ p {
     overflow: hidden;
 }
 
+/* Patrón textil semitransparente */
+.banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(45deg,
+            transparent,
+            transparent 10px,
+            rgba(255, 255, 255, 0.05) 10px,
+            rgba(255, 255, 255, 0.05) 20px);
+    pointer-events: none;
+}
+
 .banner-overlay {
     max-width: 520px;
 }
@@ -727,13 +852,40 @@ p {
 }
 
 .about-image-placeholder {
-    border-radius: 24px;
-    border: 2px dashed var(--color-primary);
+    border-radius: 50%;
+    border: 4px solid transparent;
+    background: linear-gradient(var(--color-neutral-light), var(--color-neutral-light)) padding-box,
+        linear-gradient(135deg,
+            var(--color-primary),
+            var(--color-accent),
+            var(--color-secondary)) border-box;
     min-height: 260px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: var(--font-title);
+    position: relative;
+    aspect-ratio: 1;
+}
+
+/* Marco floral tipo aro de bordado */
+.about-image-placeholder::before {
+    content: '🌺';
+    position: absolute;
+    top: -12px;
+    right: 10%;
+    font-size: 2.5rem;
+    animation: floralFloat 7s ease-in-out infinite;
+}
+
+.about-image-placeholder::after {
+    content: '🌸';
+    position: absolute;
+    bottom: -8px;
+    left: 15%;
+    font-size: 2rem;
+    animation: floralFloat 9s ease-in-out infinite;
+    animation-delay: 1.5s;
 }
 
 .timeline {
@@ -746,7 +898,17 @@ p {
     background: #fff;
     border-radius: 18px;
     padding: 1rem;
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    border: 2px solid transparent;
+    background: linear-gradient(#fff, #fff) padding-box,
+        linear-gradient(135deg,
+            rgba(217, 15, 114, 0.3),
+            rgba(244, 196, 48, 0.3)) border-box;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
 
 .timeline-icon {
@@ -878,12 +1040,21 @@ p {
 .gallery-placeholder {
     border-radius: 18px;
     min-height: 150px;
-    border: 2px dashed rgba(0, 0, 0, 0.08);
+    border: 3px solid transparent;
+    background: linear-gradient(rgba(249, 244, 238, 0.9), rgba(249, 244, 238, 0.9)) padding-box,
+        linear-gradient(135deg,
+            var(--color-primary),
+            var(--color-accent),
+            var(--color-secondary)) border-box;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0.75rem;
-    background: rgba(249, 244, 238, 0.7);
+    transition: transform 0.3s ease;
+}
+
+.gallery-placeholder:hover {
+    transform: scale(1.02);
 }
 
 .gallery-label {
@@ -918,11 +1089,12 @@ p {
 
 .map-wrapper {
     border-radius: 24px;
-    padding: 4px;
+    padding: 5px;
     background: linear-gradient(135deg,
-            rgba(217, 15, 114, 0.5),
-            rgba(244, 196, 48, 0.5),
-            rgba(31, 183, 165, 0.5));
+            var(--color-primary),
+            var(--color-accent),
+            var(--color-secondary));
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
 .map-placeholder {
@@ -999,6 +1171,11 @@ p {
 .contact-form textarea:focus {
     outline: none;
     border-bottom-color: var(--color-primary);
+    border-bottom-width: 3px;
+    background: linear-gradient(90deg,
+            rgba(217, 15, 114, 0.05),
+            rgba(244, 196, 48, 0.05),
+            rgba(31, 183, 165, 0.05));
 }
 
 .contact-form input::placeholder,
@@ -1020,6 +1197,28 @@ p {
     background: #f3e8da;
     border-top: 2px solid rgba(0, 0, 0, 0.05);
     margin-top: 2rem;
+    position: relative;
+}
+
+/* Franja textil decorativa en footer */
+.footer::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg,
+            var(--color-decorative) 0%,
+            var(--color-decorative) 25%,
+            var(--color-secondary) 25%,
+            var(--color-secondary) 50%,
+            var(--color-accent) 50%,
+            var(--color-accent) 75%,
+            var(--color-primary) 75%,
+            var(--color-primary) 100%);
+    background-size: 40px 3px;
+    opacity: 0.7;
 }
 
 .footer-inner {
@@ -1054,22 +1253,30 @@ p {
     position: fixed;
     right: 1.5rem;
     bottom: 1.5rem;
-    width: 52px;
-    height: 52px;
+    width: 56px;
+    height: 56px;
     border-radius: 999px;
     background: var(--color-secondary);
+    border: 3px solid transparent;
+    background: linear-gradient(var(--color-secondary), var(--color-secondary)) padding-box,
+        linear-gradient(135deg,
+            var(--color-primary),
+            var(--color-accent)) border-box;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 8px 24px rgba(31, 183, 165, 0.4),
+        0 4px 12px rgba(0, 0, 0, 0.2);
     cursor: pointer;
-    animation: heartbeat 6s infinite;
+    animation: heartbeat 8s infinite;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
+    z-index: 100;
 }
 
 .whatsapp-floating:hover {
-    transform: translateY(-2px) scale(1.04);
-    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.28);
+    transform: translateY(-3px) scale(1.06);
+    box-shadow: 0 12px 32px rgba(31, 183, 165, 0.5),
+        0 6px 16px rgba(0, 0, 0, 0.25);
 }
 
 .whatsapp-icon {
@@ -1107,6 +1314,89 @@ p {
 
     15% {
         transform: scale(0.96);
+    }
+}
+
+/* Animación de bordado tradicional - aparición progresiva */
+@keyframes embroideryReveal {
+    from {
+        opacity: 0;
+        letter-spacing: 0.3em;
+        transform: translateY(8px);
+        clip-path: inset(0 100% 0 0);
+    }
+
+    to {
+        opacity: 1;
+        letter-spacing: 0.05em;
+        transform: translateY(0);
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+/* Transición tipo telar - deslizamiento suave */
+@keyframes weaverSlide {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Flores chiapanecas - movimiento sutil */
+@keyframes floralFloat {
+
+    0%,
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    25% {
+        transform: translate(1px, -1px) rotate(1deg);
+    }
+
+    50% {
+        transform: translate(-1px, 1px) rotate(-1deg);
+    }
+
+    75% {
+        transform: translate(1px, 1px) rotate(0.5deg);
+    }
+}
+
+/* Pulsación suave para elementos decorativos */
+@keyframes gentlePulse {
+
+    0%,
+    100% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: scale(1.02);
+    }
+}
+
+/* Animación de corazón bordado */
+@keyframes heartFill {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
     }
 }
 
