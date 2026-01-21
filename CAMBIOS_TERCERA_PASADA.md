@@ -4,7 +4,7 @@
 
 ### 1. `frontend/src/styles/global.css`
 **Cambios principales:**
-- ✅ Agregadas 6 nuevas animaciones keyframes (embroideryReveal, weaverSlide, floralFloat, gentlePulse, heartFill)
+- ✅ Agregadas 7 nuevas animaciones keyframes (embroideryReveal, weaverSlide, floralFloat, gentlePulse, heartFill)
 - ✅ Franjas textiles decorativas en header y footer
 - ✅ Flores decorativas flotantes en Hero, About, Essence
 - ✅ Mejorado botón embroidered con efecto de brillo
