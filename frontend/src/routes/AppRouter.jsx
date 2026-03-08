@@ -9,6 +9,10 @@ import Gallery from '../pages/Gallery.jsx';
 import Location from '../pages/Location.jsx';
 import Contact from '../pages/Contact.jsx';
 
+// Admin Imports
+import AdminLayout from '../layout/AdminLayout.jsx';
+import AdminDashboard from '../pages/AdminDashboard.jsx';
+
 // Definición de rutas principales
 const AppRouter = () => {
     return (
@@ -20,6 +24,12 @@ const AppRouter = () => {
             <Route path="/galeria" element={<Gallery />} />
             <Route path="/ubicacion" element={<Location />} />
             <Route path="/contacto" element={<Contact />} />
+
+            {/* Admin Routes */}
+            <Route path="/admin" element={<AdminLayout />}>
+                <Route index element={<AdminDashboard />} />
+            </Route>
+
             <Route path="*" element={<Home />} />
         </Routes>
     );

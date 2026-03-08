@@ -1,58 +1,36 @@
 // frontend/src/components/products/ProductCard.jsx
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { useCart } from '../../context/CartContext.jsx';
 
-// Tarjeta de producto con microinteracciones suaves y corazón interactivo
+// Tarjeta de producto refinada con enfoque visual y premium
 const ProductCard = ({ product }) => {
-    // Adaptador para soportar estructura antigua y nueva durante la migración
+    // Adaptador para soportar estructura antigua y nueva
     const name = product.name || product.nombre;
     const category = product.category || product.categoria;
     const description = product.shortDescription || product.descripcion;
     const price = product.price || 0;
     const slug = product.slug || '#';
-    const image = product.images && product.images.length > 0 ? product.images[0] : null;
+    const modelImage = product.images?.find(img => img.type === 'model');
+    const studioImage = product.images?.find(img => img.type === 'studio');
+    const displayImage = modelImage || studioImage || (product.images && product.images[0]);
+    const imageUrl = displayImage?.url;
     const isPremium = product.isPremium || false;
-
-    const [isFavorite, setIsFavorite] = useState(false);
-    const { addToCart } = useCart();
-
-    const handleFavoriteClick = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        setIsFavorite(!isFavorite);
-    };
-
-    const handleQuickAdd = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        addToCart(product);
-    };
 
     return (
         <Link to={`/producto/${slug}`} className="product-card-link">
             <article className={`product-card ${isPremium ? 'is-premium' : ''}`}>
-                {isPremium && <span className="card-badge-premium">Premium</span>}
-
-                <button
-                    className="product-heart"
-                    onClick={handleFavoriteClick}
-                    aria-label={isFavorite ? "Quitar de favoritos" : "Agregar a favoritos"}
-                    style={{
-                        background: isFavorite ? 'var(--color-primary)' : 'rgba(249, 244, 238, 0.95)',
-                        color: isFavorite ? '#fff' : 'var(--color-primary)'
-                    }}
-                >
-                    {isFavorite ? '♥' : '♡'}
-                </button>
-
                 <div
                     className="product-image"
                     role="img"
                     aria-label={`Imagen de: ${name}`}
                 >
-                    {image ? (
-                        <img src={image} alt={name} className="product-image-real" />
+                    {imageUrl ? (
+                        <img 
+                            src={imageUrl} 
+                            alt={name} 
+                            className="product-image-real" 
+                            loading="lazy"
+                        />
                     ) : (
                         <div className="product-image-placeholder" aria-hidden="true">
                             {name.charAt(0)}
@@ -60,29 +38,28 @@ const ProductCard = ({ product }) => {
                     )}
                 </div>
 
+
+
                 <div className="product-info">
-                    <h3>{name}</h3>
-                    {category && (
-                        <p className="product-category">
-                            {category}
-                        </p>
-                    )}
+                    <div className="product-header">
+                        <span className="product-category">{category}</span>
+                        <h3>{name}</h3>
+                    </div>
+                    
                     {description && (
                         <p className="product-description">
                             {description}
                         </p>
                     )}
+                    
                     <div className="product-footer">
                         <p className="product-price">
-                            ${price.toFixed(2)}
+                            <span className="price-currency">$</span>
+                            <span className="price-value">{price.toLocaleString()}</span>
                         </p>
-                        <button
-                            className="btn-outline btn-sm"
-                            type="button"
-                            onClick={handleQuickAdd}
-                        >
-                            + Agregar
-                        </button>
+                        <div className="view-details-indicator">
+                            Ver detalle →
+                        </div>
                     </div>
                 </div>
             </article>
@@ -91,3 +68,4 @@ const ProductCard = ({ product }) => {
 };
 
 export default ProductCard;
+

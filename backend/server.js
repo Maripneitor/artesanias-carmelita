@@ -1,14 +1,17 @@
 // backend/server.js
 const express = require('express');
 const cors = require('cors');
+const routes = require('./routes'); // Import new routes
 
 const app = express();
 
 // Configuración básica
 app.use(cors());
-app.use(express.json());
+// Increase limit for Base64 signatures
+app.use(express.json({ limit: '10mb' }));
 
-// TODO: mover a /src/routes y /src/controllers cuando crezca el proyecto
+// Mount API routes
+app.use('/api', routes);
 
 // Endpoint de salud
 app.get('/api/health', (req, res) => {

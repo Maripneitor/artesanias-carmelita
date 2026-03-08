@@ -1,0 +1,7 @@
+
+> artesanias-chiapas-backend@1.0.0 start
+> node server.js
+
+Servidor backend escuchando en http://localhost:4000
+Connected to the SQLite database.
+Database initialized with schema.

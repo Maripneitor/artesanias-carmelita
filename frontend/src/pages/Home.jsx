@@ -1,31 +1,14 @@
 // frontend/src/pages/Home.jsx
 import React, { useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+
 import HeroSection from '../components/home/HeroSection.jsx';
 import ProductCard from '../components/products/ProductCard.jsx';
-import AlertCard from '../components/common/AlertCard.jsx';
 import { products } from '../data/products.js';
 
-const textilesItems = [
-    'Bordado floral fucsia',
-    'Textil en turquesa',
-    'Amarillo maíz tradicional',
-    'Rojo lacandón intenso',
-    'Patrones geométricos',
-    'Detalles del taller',
-];
+
 
 const Home = () => {
     const carouselRef = useRef(null);
-    const navigate = useNavigate();
-
-    // Obtener productos destacados (premium o los primeros 4)
-    const featuredProducts = products.filter(p => p.isPremium).slice(0, 4);
-    // Si no hay suficientes premium, rellenar
-    if (featuredProducts.length < 4) {
-        const others = products.filter(p => !p.isPremium).slice(0, 4 - featuredProducts.length);
-        featuredProducts.push(...others);
-    }
 
     const scrollCarousel = (direction) => {
         const node = carouselRef.current;
@@ -38,24 +21,44 @@ const Home = () => {
         });
     };
 
-    const handleAlertRead = () => {
-        navigate('/productos');
-    };
+    // Scroll Animation Logic
+    React.useEffect(() => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        const targets = document.querySelectorAll('.fade-in-up');
+        targets.forEach(t => observer.observe(t));
+
+        // Auto-scroll carousel
+        const interval = setInterval(() => {
+            if (carouselRef.current) scrollCarousel('next');
+        }, 5000);
+
+        return () => {
+            observer.disconnect();
+            clearInterval(interval);
+        };
+    }, []);
+
+
+    const featuredProducts = products
+        .filter(p => p.luzVerde)
+        .slice(0, 4);
+
+
+
 
     return (
+
         <div className="page page-home">
             <HeroSection />
 
-            {/* Alert Card - Mensaje de bienvenida/promoción */}
-            <section className="section" style={{ display: 'flex', justifyContent: 'center' }}>
-                <AlertCard
-                    title="¡Bienvenido a Artesanías Carmelita!"
-                    message="Descubre nuestras nuevas piezas bordadas a mano con los colores tradicionales de Chiapas. Cada artesanía cuenta una historia única."
-                    readText="Ver catálogo"
-                    markText="Cerrar"
-                    onRead={handleAlertRead}
-                />
-            </section>
+
 
             <section
                 className="section section-featured"
@@ -119,57 +122,36 @@ const Home = () => {
             </section>
 
             <section
-                className="section section-textiles"
-                aria-labelledby="textiles-title"
+                className="section section-references"
+                aria-labelledby="references-title"
             >
-                <div className="section-textiles-header">
-                    <h2 id="textiles-title">Textiles y colores de Chiapas</h2>
+                <div className="section-references-header">
+                    <h2 id="references-title">Imágenes de Referencia</h2>
                     <p>
-                        Bordados, flores y figuras geométricas que mezclan el fucsia
-                        chiapaneco, el turquesa y el amarillo maíz en piezas únicas.
+                        Ejemplos de la riqueza textil y el detalle que define nuestra curaduría.
                     </p>
                 </div>
 
-                <div className="section-textiles-carousel">
-                    <button
-                        type="button"
-                        className="carousel-arrow left"
-                        onClick={() => scrollCarousel('prev')}
-                        aria-label="Ver textiles anteriores"
-                    >
-                        ‹
-                    </button>
-
-                    <div
-                        className="textiles-carousel"
-                        ref={carouselRef}
-                        aria-label="Galería horizontal de textiles"
-                    >
-                        {textilesItems.map((label, idx) => (
-                            <div key={idx} className="textiles-item">
-                                <div
-                                    className="textiles-thumb"
-                                    role="img"
-                                    aria-label={label}
-                                >
-                                    <span className="textiles-label" aria-hidden="true">
-                                        {label}
-                                    </span>
-                                </div>
+                <div className="references-carousel-container">
+                    <div className="references-track" ref={carouselRef}>
+                        {[1, 2, 3, 1].map((num, idx) => (
+                            <div key={idx} className="reference-slide fade-in-up">
+                                <img 
+                                    src={num === 1 ? '/products/huipil-gala-modelo.webp' : `/references/ref${num}.webp`} 
+                                    alt={`Referencia ${idx + 1}`} 
+                                    className="ref-img"
+                                />
                             </div>
                         ))}
                     </div>
-
-                    <button
-                        type="button"
-                        className="carousel-arrow right"
-                        onClick={() => scrollCarousel('next')}
-                        aria-label="Ver más textiles"
-                    >
-                        ›
-                    </button>
+                    
+                    <div className="carousel-nav-overlay">
+                        <button className="nav-circle prev" onClick={() => scrollCarousel('prev')}>‹</button>
+                        <button className="nav-circle next" onClick={() => scrollCarousel('next')}>›</button>
+                    </div>
                 </div>
             </section>
+
 
             <section
                 className="section section-how-to-arrive"

@@ -12,20 +12,17 @@ export const useCart = () => {
 };
 
 export const CartProvider = ({ children }) => {
-    const [cartItems, setCartItems] = useState([]);
-    const [isCartOpen, setIsCartOpen] = useState(false);
-
-    // Cargar carrito del localStorage al iniciar
-    useEffect(() => {
-        const savedCart = localStorage.getItem('carmelita_cart');
-        if (savedCart) {
-            try {
-                setCartItems(JSON.parse(savedCart));
-            } catch (e) {
-                console.error('Error al cargar el carrito:', e);
-            }
+    // Cargar carrito del localStorage al iniciar con lazy init
+    const [cartItems, setCartItems] = useState(() => {
+        try {
+            const savedCart = localStorage.getItem('carmelita_cart');
+            return savedCart ? JSON.parse(savedCart) : [];
+        } catch (e) {
+            console.error('Error al cargar el carrito:', e);
+            return [];
         }
-    }, []);
+    });
+    const [isCartOpen, setIsCartOpen] = useState(false);
 
     // Guardar carrito en localStorage cuando cambie
     useEffect(() => {

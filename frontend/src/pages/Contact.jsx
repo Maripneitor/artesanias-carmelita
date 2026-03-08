@@ -118,6 +118,35 @@ const Contact = () => {
                             ✓ ¡Gracias! Tu mensaje se ha registrado (versión demo).
                         </p>
                     )}
+                    <div className="contact-bottom-row">
+                        <div className="map-widget-refined">
+                            <div className="map-header">
+                                <span className="icon">📍</span>
+                                <h3>Visítanos en el Taller</h3>
+                            </div>
+                            <div className="map-container-mock">
+                                <iframe 
+                                    title="Ubicación Taller"
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15286.4259278912!2d-92.635848!3d16.737130!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85ed273f789d7b9d%3A0x6a0c0e86b9706e41!2sSan%20Crist%C3%B3bal%20de%20las%20Casas%2C%20Chis.!5e0!3m2!1ses-419!2smx!4v1700000000000"
+                                    width="100%" 
+                                    height="300" 
+                                    style={{ border: 0, borderRadius: '18px' }} 
+                                    allowFullScreen="" 
+                                    loading="lazy"
+                                ></iframe>
+                            </div>
+                        </div>
+
+                        <div className="references-gallery">
+                            <h3 className="ref-title">Nuestros Trabajos Previos</h3>
+                            <div className="ref-grid-clean">
+                                <div className="ref-item"><img src="/references/ref1.webp" alt="Referencia 1" /></div>
+                                <div className="ref-item"><img src="/references/ref2.webp" alt="Referencia 2" /></div>
+                                <div className="ref-item"><img src="/references/ref3.webp" alt="Referencia 3" /></div>
+                                <div className="ref-item"><img src="/products/huipil-gala-fondo.webp" alt="Referencia 4" /></div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </section>
         </div>
