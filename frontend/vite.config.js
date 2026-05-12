@@ -5,6 +5,7 @@ import react from '@vitejs/plugin-react';
 // Configuración de Vite
 export default defineConfig({
   plugins: [react()],
+  base: '/artesanias-carmelita/',
   server: {
     // Puerto que estás usando actualmente
     port: 5173,
